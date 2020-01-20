@@ -36,14 +36,16 @@ plays.forEach((button, index) => {
             if (button.textContent === '' && lastBall === 'O') {
                 button.textContent = 'X';
                 lastBall = 'X';
+                numberOfClicks++;
             } else if (button.textContent === '' && lastBall === 'X') {
                 button.textContent = 'O';
                 lastBall = 'O';
+                numberOfClicks++;
             } else if (lastBall == undefined) {
                 button.textContent = 'O';
                 lastBall = 'O';
+                numberOfClicks++;
             }
-            numberOfClicks++;
             grid[index] = button.textContent;
             if (lastBall === 'X') {
                 var last = 'X';
@@ -70,6 +72,7 @@ plays.forEach((button, index) => {
                 // if anyone wins 
                 if (wincase) {
                     console.log('Player ' + last + ' wins!')
+                    started = false;
                     document.querySelector('.message').textContent = 'Player ' + last + ' wins!';
                     numberOfClicks = 0;
                     plays.forEach(button => {
@@ -77,14 +80,15 @@ plays.forEach((button, index) => {
                     })
                     grid = [];
                 } else if (numberOfClicks % 9 === 0) {
-                    console.log('Stales')
+
                     plays.forEach(button => {
                         button.textContent = '';
                     })
+                    document.querySelector('.message').textContent = "Tie";
+                    started = false;
                     grid = [];
                 }
-            }
-            if (lastBall === 'O') {
+            } else if (lastBall === 'O') {
                 var last = 'O';
                 var wincase = false;
                 if (grid[1 - 1] === last && grid[2 - 1] === last && grid[3 - 1] === last) {
@@ -110,6 +114,7 @@ plays.forEach((button, index) => {
                     plays.forEach(button => {
                         button.textContent = '';
                     })
+                    started = false;
                     grid = [];
                 } else if (numberOfClicks % 9 === 0) {
                     plays.forEach(button => {
@@ -117,6 +122,7 @@ plays.forEach((button, index) => {
                         document.querySelector('.message').textContent = "Tie";
                     })
                     grid = [];
+                    started = false;
                 }
             }
             if (!started) { started = true; }
