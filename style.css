@@ -12,32 +12,37 @@ body {
 }
 
 .container {
+    overflow: hidden;
     display: grid;
     grid-column: 1 / -1;
     justify-content: center;
     min-height: 100vh;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
     align-content: center;
 }
 
 .container>div {
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid black;
     cursor: pointer;
     outline: none;
     padding: 30px;
-    background-color: rgba(255, 255, 255, .75);
+    background-color: rgba(255, 255, 255, .5);
 }
 
-.container>div:hover {
+.button-start,
+.button-restart {
+    /* padding-bottom: 5px; */
+    grid-column: span 3;
+}
+
+.button-start:hover {
+    font-size: large;
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.container .row {
-    height: 25px;
-    width: 25px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
+.row:hover {
+    /* display: none; */
+    background-color: rgba(255, 255, 255, 0.9);
 }
