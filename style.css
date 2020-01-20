@@ -11,6 +11,12 @@ body {
     background: linear-gradient(to right, #00AAFF, #00ffcc, #00BB55, rgb(7, 152, 189));
 }
 
+.main {
+    justify-content: center;
+    min-height: 100vh;
+    align-content: center;
+}
+
 .container {
     overflow: hidden;
     display: grid;

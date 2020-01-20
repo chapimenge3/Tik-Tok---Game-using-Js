@@ -1,35 +1,141 @@
 const plays = document.querySelectorAll('.row')
 const startButton = document.querySelector('.button-start');
 const restartButton = document.querySelector('.button-restart');
-var grid = [];
-var last = undefined;
+var grid = ['', '', '', '', '', '', '', '', ''];
+var winstate = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 3, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 5, 9],
+    [7, 5, 3]
+]
+var lastBall = undefined;
 var started = false
-plays.forEach(button => {
-    button.textContent = '';
-})
-plays.forEach((button, index) => {
-    button.addEventListener('click', () => {
-        console.log(index)
-        console.log(button.textContent.toString() + ' ' + last);
-        if (button.textContent === '' && last === 'O') {
-            button.textContent = 'X';
-            last = 'X';
-        } else if (button.textContent === '' && last === 'X') {
-            button.textContent = 'O';
-            last = 'O';
-        } else if (last == undefined) {
-            button.textContent = 'O';
-            last = 'O';
-        }
-        grid[index] = button.textContent;
-        console.log(grid)
-        if (!started) { started = true; }
-    })
+var numberOfClicks = 0;
 
-})
-
-startButton.addEventListener('click', () => {
+// makes first all to empty when window finishs loading 
+window.addEventListener('load', () => {
     plays.forEach(button => {
-        button.textContent = '';
+            button.textContent = '';
+        })
+        // document.querySelector('.message').textContent = '';
+})
+
+
+// we add event listner for each element of the playing box with click event 
+plays.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            // console.log(index)
+            // console.log(button.textContent.toString() + ' ' + last);
+            // document.querySelector('.message').textContent = '';
+            if (button.textContent === '' && lastBall === 'O') {
+                button.textContent = 'X';
+                lastBall = 'X';
+            } else if (button.textContent === '' && lastBall === 'X') {
+                button.textContent = 'O';
+                lastBall = 'O';
+            } else if (lastBall == undefined) {
+                button.textContent = 'O';
+                lastBall = 'O';
+            }
+            numberOfClicks++;
+            grid[index] = button.textContent;
+            if (lastBall === 'X') {
+                var last = 'X';
+                var wincase = false;
+                if (grid[1 - 1] === last && grid[2 - 1] === last && grid[3 - 1] === last) {
+                    wincase = true;
+                } else if (grid[4 - 1] === last && grid[5 - 1] === last && grid[6 - 1] === last) {
+                    wincase = true;
+                } else if (grid[7 - 1] === last && grid[8 - 1] === last && grid[9 - 1] === last) {
+                    wincase = true;
+                } else if (grid[1 - 1] === last && grid[4 - 1] === last && grid[7 - 1] === last) {
+                    wincase = true;
+                } else if (grid[2 - 1] === last && grid[5 - 1] === last && grid[8 - 1] === last) {
+                    wincase = true;
+                } else if (grid[3 - 1] === last && grid[6 - 1] === last && grid[9 - 1] === last) {
+                    wincase = true;
+                } else if (grid[1 - 1] === last && grid[5 - 1] === last && grid[9 - 1] === last) {
+                    wincase = true;
+                } else if (grid[3 - 1] === last && grid[2 - 1] === last && grid[7 - 1] === last) {
+                    wincase = true;
+                }
+
+                // if anyone wins 
+                if (wincase) {
+                    console.log('Player ' + last + ' wins!')
+                    document.querySelector('.message').textContent = 'Player ' + last + ' wins!';
+                    plays.forEach(button => {
+                        button.textContent = '';
+                    })
+                    grid = [];
+                } else if (wincase && numberOfClicks === 9) {
+                    console.log('Stales')
+                    plays.forEach(button => {
+                        button.textContent = '';
+                    })
+                    grid = [];
+                }
+            }
+            if (lastBall === 'O') {
+                var last = 'O';
+                var wincase = false;
+                if (grid[1 - 1] === last && grid[2 - 1] === last && grid[3 - 1] === last) {
+                    wincase = true;
+                } else if (grid[4 - 1] === last && grid[5 - 1] === last && grid[6 - 1] === last) {
+                    wincase = true;
+                } else if (grid[7 - 1] === last && grid[8 - 1] === last && grid[9 - 1] === last) {
+                    wincase = true;
+                } else if (grid[1 - 1] === last && grid[4 - 1] === last && grid[7 - 1] === last) {
+                    wincase = true;
+                } else if (grid[2 - 1] === last && grid[5 - 1] === last && grid[8 - 1] === last) {
+                    wincase = true;
+                } else if (grid[3 - 1] === last && grid[6 - 1] === last && grid[9 - 1] === last) {
+                    wincase = true;
+                } else if (grid[1 - 1] === last && grid[5 - 1] === last && grid[9 - 1] === last) {
+                    wincase = true;
+                } else if (grid[3 - 1] === last && grid[2 - 1] === last && grid[7 - 1] === last) {
+                    wincase = true;
+                }
+                // if anyone wins 
+                if (wincase) {
+                    console.log('Player ' + last + ' wins!')
+                    document.querySelector('.message').textContent = 'Player ' + last + ' wins!';
+                    plays.forEach(button => {
+                        button.textContent = '';
+                    })
+                    grid = [];
+                } else if (wincase && numberOfClicks === 9) {
+                    console.log('Stales')
+                    plays.forEach(button => {
+                        button.textContent = '';
+                    })
+                    grid = [];
+                }
+            }
+            if (!started) { started = true; }
+        })
+
     })
+    // add event listner to start button
+startButton.addEventListener('click', () => {
+    if (started) {
+
+        if (confirm("Are You Sure to start again?")) {
+            plays.forEach(button => {
+                button.textContent = '';
+            })
+            grid = [];
+        }
+    } else {
+        plays.forEach(button => {
+            button.textContent = '';
+        })
+        grid = [];
+    }
+    // document.querySelector('.message').textContent = '';
+
 })
