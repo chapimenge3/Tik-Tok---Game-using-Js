@@ -19,15 +19,17 @@ var numberOfClicks = 0;
 // makes first all to empty when window finishs loading 
 window.addEventListener('load', () => {
     plays.forEach(button => {
-            button.textContent = '';
-        })
-        // document.querySelector('.message').textContent = '';
+        button.textContent = '';
+    })
+    document.querySelector('.message').textContent = 'Playing...';
+    // document.querySelector('.message').textContent = '';
 })
 
 
 // we add event listner for each element of the playing box with click event 
 plays.forEach((button, index) => {
         button.addEventListener('click', () => {
+            document.querySelector('.message').textContent = 'Playing...';
             // console.log(index)
             // console.log(button.textContent.toString() + ' ' + last);
             // document.querySelector('.message').textContent = '';
@@ -60,7 +62,8 @@ plays.forEach((button, index) => {
                     wincase = true;
                 } else if (grid[1 - 1] === last && grid[5 - 1] === last && grid[9 - 1] === last) {
                     wincase = true;
-                } else if (grid[3 - 1] === last && grid[2 - 1] === last && grid[7 - 1] === last) {
+                } else if (grid[3 - 1] === last && grid[5 - 1] === last && grid[7 - 1] === last) {
+                    console.log("hereee")
                     wincase = true;
                 }
 
@@ -68,11 +71,12 @@ plays.forEach((button, index) => {
                 if (wincase) {
                     console.log('Player ' + last + ' wins!')
                     document.querySelector('.message').textContent = 'Player ' + last + ' wins!';
+                    numberOfClicks = 0;
                     plays.forEach(button => {
                         button.textContent = '';
                     })
                     grid = [];
-                } else if (wincase && numberOfClicks === 9) {
+                } else if (numberOfClicks % 9 === 0) {
                     console.log('Stales')
                     plays.forEach(button => {
                         button.textContent = '';
@@ -97,21 +101,20 @@ plays.forEach((button, index) => {
                     wincase = true;
                 } else if (grid[1 - 1] === last && grid[5 - 1] === last && grid[9 - 1] === last) {
                     wincase = true;
-                } else if (grid[3 - 1] === last && grid[2 - 1] === last && grid[7 - 1] === last) {
+                } else if (grid[3 - 1] === last && grid[5 - 1] === last && grid[7 - 1] === last) {
                     wincase = true;
                 }
                 // if anyone wins 
                 if (wincase) {
-                    console.log('Player ' + last + ' wins!')
                     document.querySelector('.message').textContent = 'Player ' + last + ' wins!';
                     plays.forEach(button => {
                         button.textContent = '';
                     })
                     grid = [];
-                } else if (wincase && numberOfClicks === 9) {
-                    console.log('Stales')
+                } else if (numberOfClicks % 9 === 0) {
                     plays.forEach(button => {
                         button.textContent = '';
+                        document.querySelector('.message').textContent = "Tie";
                     })
                     grid = [];
                 }
