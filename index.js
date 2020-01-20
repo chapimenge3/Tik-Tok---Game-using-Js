@@ -1,8 +1,9 @@
 const plays = document.querySelectorAll('.row')
+const startButton = document.querySelector('.button-start');
+const restartButton = document.querySelector('.button-restart');
 var grid = [];
 var last = undefined;
 var started = false
-const startButton = document.querySelector('.button-start');
 plays.forEach(button => {
     button.textContent = '';
 })
@@ -25,4 +26,10 @@ plays.forEach((button, index) => {
         if (!started) { started = true; }
     })
 
+})
+
+startButton.addEventListener('click', () => {
+    plays.forEach(button => {
+        button.textContent = '';
+    })
 })

@@ -14,7 +14,7 @@ body {
 .container {
     overflow: hidden;
     display: grid;
-    grid-column: 1 / -1;
+    /* grid-column: 1 / -1; */
     justify-content: center;
     min-height: 100vh;
     grid-template-columns: repeat(3, 90px);
@@ -31,10 +31,20 @@ body {
     background-color: rgba(255, 255, 255, .5);
 }
 
+.button-restart {
+    size: 10px;
+}
+
 .button-start,
 .button-restart {
     /* padding-bottom: 5px; */
     grid-column: span 3;
+    width: auto;
+}
+
+.button-restart:hover {
+    font-size: large;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .button-start:hover {
