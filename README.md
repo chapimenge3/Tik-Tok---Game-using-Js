@@ -2,5 +2,5 @@
 
 ### it is done by vanila Js , pure CSS and html 
 
-### to preview the game
+### to preview the game 
 ![Example](examlpe.png) 
