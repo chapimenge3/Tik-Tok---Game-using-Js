@@ -1,1 +1,3 @@
-# Tik-Tok---Game-using-Js
+# Tik-Tac-Toe---Game-using-Js
+
+### it is done by vanila Js , pure CSS and html 
